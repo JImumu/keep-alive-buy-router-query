@@ -8,18 +8,18 @@ Vue.config.productionTip = false
 router.beforeEach((to, from, next) => {
 
   // 获取下一个路由的query
-  const routerQuery = JSON.stringify(to.query)
+  const routeQuery = JSON.stringify(to.query)
   // 获取vuex中下一个路由的query（）
-  const routerQueryInRecord = store.state.keepAlive.record[to.name + ':routerQuery']
+  const routeQueryInRecord = store.state.keepAlive.record[to.name + ':routeQuery']
   // 准备vuex仓库里keepAlive的数据
   const data = {
     name: to.name,
-    value: routerQuery
+    value: routeQuery
   }
   // 获取下一个路由的父路由
   const parentRouteArr = to.matched.map(e => e.parent ? e.parent.name : '')
   // vuex中的记录与获取下一个路由的query不一致，则表示页面需要重新创建（从keep-alive组件的include属性中移除）
-  if (routerQueryInRecord && routerQuery !== routerQueryInRecord) {
+  if (routeQueryInRecord && routeQuery !== routeQueryInRecord) {
     // 通过vuex，改变keep-alive组件的include属性
     store.dispatch('keepAlive/remove', to.name)
     // 父路由需要一起删除
