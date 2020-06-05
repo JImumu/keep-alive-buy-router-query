@@ -1,33 +1,33 @@
 const state = {
-  router: ['Home', 'Doctor'],
+  routes: ['Home', 'Doctor'],
   record: {}
 }
 
 const actions = {
   add ({ commit }, data) {
-    const router = [...state.router]
+    const routes = [...state.routes]
     const name = typeof data === 'object' ? data.name : data
-    if (!router.includes(name)) {
-      router.push(name)
-      commit('SET_ROUTER', router)
+    if (!routes.includes(name)) {
+      routes.push(name)
+      commit('SET_ROUTES', routes)
       typeof data === 'object' && commit('SET_RECORD', data)
     }
   },
 
   remove ({ commit }, data) {
     const name = typeof data === 'object' ? data.name : data
-    const router = state.router.filter(e => e !== name)
-    commit('SET_ROUTER', router)
+    const routes = state.routes.filter(e => e !== name)
+    commit('SET_ROUTES', routes)
   }
 }
 
 const mutations = {
-  SET_ROUTER: (state, router) => {
-    state.router = router
+  SET_ROUTES: (state, routes) => {
+    state.routes = routes
   },
 
   SET_RECORD: (state, data) => {
-    state.record[data.name + ':doctorId'] = data.value
+    state.record[data.name + ':routeQuery'] = data.value
   }
 }
 
