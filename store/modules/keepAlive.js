@@ -27,7 +27,7 @@ const mutations = {
   },
 
   SET_RECORD: (state, data) => {
-    state.record[data.name + ':routeQuery'] = data.value
+    state.record[data.name + ':fullPath'] = data.value
   }
 }
 
